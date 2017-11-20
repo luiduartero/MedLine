@@ -28,4 +28,4 @@ deploy:
   skip_cleanup: true
   github_token: d9c157a4f47ae00301b12a8490e5a473169a9d5d # Set in travis-ci.org dashboard
   on:
-    branch: master
+    branch: test
