@@ -26,6 +26,6 @@ after_success:
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: 89528662f405e6e1fee62471dac7e6238b59c26a # Set in travis-ci.org dashboard
+  github_token: d9c157a4f47ae00301b12a8490e5a473169a9d5d # Set in travis-ci.org dashboard
   on:
     branch: master
