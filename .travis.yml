@@ -1,22 +1,26 @@
 language: android
-jdk: oraclejdk8
-env:
-  global:
-    - ANDROID_TARGET=android-15
-    - ANDROID_ABI=armeabi-v7a
+jdk: oraclejdk7
 android:
   components:
   - tools
   - platform-tools
-  - build-tools-23.0.3
-  - android-15
-  - extra-android-m2repository
-  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
-script:
-  - ./gradlew build jacocoTestReport assembleAndroidTest
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - build-tools-22.0.1
+  - android-22
+  - extra
+  - addon
+  - sys-img-armeabi-v7a-android-22
+before_script:
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
-  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+  - adb shell input keyevent 82 &
+script:
+  - ./gradlew connectedAndroidTest
   - ./gradlew connectedCheck
 after_success:
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: 89528662f405e6e1fee62471dac7e6238b59c26a # Set in travis-ci.org dashboard
+  on:
+    branch: master
