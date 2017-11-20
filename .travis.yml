@@ -1,18 +1,32 @@
 language: android
-jdk: oraclejdk7
+jdk: oraclejdk8
+env:
+  global:
+    - ANDROID_TARGET=android-23
+    - ANDROID_ABI=x86
+
 android:
   components:
   - tools
   - platform-tools
-  - build-tools-22.0.1
-  - android-22
-  - extra
-  - addon
-  - sys-img-armeabi-v7a-android-22
+  - build-tools-25.0.1
+  - android-23
+  - extra-android-m2repository
+  - extra-google-m2repository
+  - sys-img-x86-android-23
+script:
+  - android list targets
+  - ./gradlew build connectedCheck --debug
+  #- echo no | android create avd --force -n test -t android-23 --abi x86 -no-accel
+  #- emulator -avd test -no-skin -no-audio -no-window &
+  #- android-wait-for-emulator
+  #- adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+  #- ./gradlew installDebug
 after_success:
+  - bash echo "Yata!"
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: 89528662f405e6e1fee62471dac7e6238b59c26a # Set in travis-ci.org dashboard
+  github_token: d9c157a4f47ae00301b12a8490e5a473169a9d5d # Set in travis-ci.org dashboard
   on:
     branch: master
