@@ -1,7 +1,8 @@
 language: android
 sudo: required
 jdk: oraclejdk8
-
+before_install:
+ - chmod +x gradlew
 android:
   components:
     - build-tools-19.0.1
