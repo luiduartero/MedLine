@@ -7,9 +7,7 @@ android:
     - android-25
     - sys-img-armeabi-v7a-android-tv-25
     - tools
-    - add-on
     - platform-tools
-    - extra-android-m2repository
 before_install:
  - chmod +x gradlew
 deploy:
