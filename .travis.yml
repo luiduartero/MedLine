@@ -15,6 +15,7 @@ android:
   - sys-img-x86-android-23
 script:
   - android list targets
+  - ./gradlew assembleDebug --debug
 after_success:
   - bash echo "Yata!"
 deploy:
